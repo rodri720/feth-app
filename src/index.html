@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feth Gestiones Comerciales</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .category-card {
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .carousel-item img {
+            height: 300px;
+            object-fit: cover;
+        }
+        
+        .contact-form {
+            background-color: #f8f9fa;
+            padding: 40px;
+            border-radius: 10px;
+        }
+        
+        footer {
+            background-color: #343a40;
+            color: white;
+            padding: 30px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Feth Gestiones Comerciales</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#propiedades">Propiedades</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#vehiculos">Vehículos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#bienes">Bienes Generales</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Encuentra lo que buscas</h1>
+            <p class="lead">Propiedades, vehículos y bienes generales al mejor precio</p>
+            <a href="#contacto" class="btn btn-primary btn-lg mt-3">Contáctanos</a>
+        </div>
+    </section>
+
+    <!-- Propiedades Section -->
+    <section id="propiedades" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Propiedades</h2>
+            
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card category-card">
+                        <div class="card-body text-center">
+                            <h3>Alquiler Temporario</h3>
+                            <p>Encuentra tu hogar temporal para vacaciones o estadías cortas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card category-card">
+                        <div class="card-body text-center">
+                            <h3>Alquiler Permanente</h3>
+                            <p>Propiedades para alquilar a largo plazo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <div class="card category-card">
+                        <div class="card-body text-center">
+                            <h3>Venta de Propiedades</h3>
+                            <p>Encuentra tu hogar ideal</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Carrusel Propiedades -->
+            <h3 class="mt-5 mb-3">Propiedades destacadas</h3>
+            <div id="propiedadesCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Propiedad 1">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Casa en zona residencial</h5>
+                            <p>3 dormitorios, 2 baños, jardín</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Propiedad 2">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Departamento moderno</h5>
+                            <p>2 dormitorios, amenities</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Propiedad 3">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Casa de playa</h5>
+                            <p>Temporario disponible</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#propiedadesCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#propiedadesCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vehículos Section -->
+    <section id="vehiculos" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Vehículos</h2>
+            
+            <!-- Carrusel Vehículos -->
+            <div id="vehiculosCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Vehículo 1">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Automóviles</h5>
+                            <p>Variedad de modelos y marcas</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Vehículo 2">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Motos</h5>
+                            <p>Para todos los gustos</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Vehículo 3">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Camionetas</h5>
+                            <p>Potencia y capacidad</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#vehiculosCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#vehiculosCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bienes Generales Section -->
+    <section id="bienes" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Bienes Generales</h2>
+            
+            <!-- Carrusel Bienes Generales -->
+            <div id="bienesCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Bien 1">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Electrodomésticos</h5>
+                            <p>Nuevos y usados</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Bien 2">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Muebles</h5>
+                            <p>Para tu hogar u oficina</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Bien 3">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Objetos de valor</h5>
+                            <p>Coleccionables y antigüedades</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#bienesCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#bienesCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section id="contacto" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="contact-form">
+                        <h3 class="mb-4">¿No encontraste lo que buscabas?</h3>
+                        <p>Déjanos tu consulta y te ayudaremos a encontrar lo que necesitas.</p>
+                        <a href="https://forms.gle/qRmzNCVhdAd8Vcda7" class="btn btn-primary" target="_blank">Formulario de Búsqueda</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-4 mt-lg-0">
+                    <div class="contact-form">
+                        <h3 class="mb-4">¿Quieres incorporar un producto?</h3>
+                        <p>Si tienes una propiedad, vehículo o bien que quieras ofrecer, completa nuestro formulario.</p>
+                        <a href="https://forms.gle/bqqHAaFj4zoEVCpq8" class="btn btn-success" target="_blank">Formulario para Nuevos Productos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center">
+        <div class="container">
+            <h3>Feth Gestiones Comerciales</h3>
+            <p class="mb-4">Tu solución en propiedades, vehículos y bienes generales</p>
+            <p>&copy; 2023 Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
