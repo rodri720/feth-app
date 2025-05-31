@@ -1,0 +1,11 @@
+{
+  "storage": {
+    "rules": "storage.rules",
+    "cors": [{
+      "origin": ["http://localhost:5500"],
+      "method": ["GET", "PUT", "POST", "DELETE"],
+      "responseHeader": ["Content-Type"],
+      "maxAgeSeconds": 3600
+    }]
+  }
+}
