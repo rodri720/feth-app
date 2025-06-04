@@ -1,11 +1,44 @@
 {
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
   "storage": {
-    "rules": "storage.rules",
-    "cors": [{
-      "origin": ["http://localhost:5500"],
-      "method": ["GET", "PUT", "POST", "DELETE"],
-      "responseHeader": ["Content-Type"],
-      "maxAgeSeconds": 3600
-    }]
-  }
+    "rules": "storage.rules"
+  },
+  "emulators": {
+    "firestore": {
+      "port": 18080
+    },
+    "storage": {
+      "port": 9199
+    },
+    "ui": {
+      "enabled": true,
+      "port": 4000
+    },
+    "auth": {
+      "port": 19099
+    },
+    "hosting": {
+      "port": 5000
+    },
+    "singleProjectMode": true
+  },
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log",
+        "*.local"
+      ],
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint"
+      ]
+    }
+  ]
 }

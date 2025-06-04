@@ -7,6 +7,10 @@
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-storage-compat.js"></script>
     <title>Feth Gestiones Comerciales</title>
+    <!-- En index.html -->
+    <a href="login.html">Ir a Login</a> <!-- Archivo en la misma carpeta -->
+
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .hero-section {
@@ -89,39 +93,28 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <h1 class="display-4 fw-bold">Encuentra lo que buscas</h1>
-            <p class="lead">Propiedades, vehículos y bienes generales al mejor precio</p>
-            <a href="#contacto" class="btn btn-primary btn-lg mt-3">Contáctanos</a>
+    <!-- Sección después del Hero (antes de Propiedades) -->
+<section class="py-4 bg-light">
+    <div class="container">
+        <div class="d-flex flex-wrap justify-content-center gap-3" id="categoryFilters">
+            <button class="btn btn-outline-primary category-filter" data-category="venta">Propiedades en Venta</button>
+            <button class="btn btn-outline-primary category-filter" data-category="temporario">Alquiler Temporario</button>
+            <button class="btn btn-outline-primary category-filter" data-category="alquiler">Alquiler Permanente</button>
+            <button class="btn btn-outline-primary category-filter" data-category="autos">Vehículos</button>
+            <button class="btn btn-outline-primary category-filter" data-category="bienes">Bienes Generales</button>
         </div>
-    </section>
+    </div>
+</section>
 
-    <!-- Propiedades Section -->
-    <section id="propiedades" class="py-5">
-        <div class="container">
-            <h2 class="text-center mb-5">Propiedades</h2>
-            
-            <div class="row mb-4">
-                <div class="col-md-6">
-                    <div class="card category-card">
-                        <div class="card-body text-center">
-                            <h3>Alquiler Temporario</h3>
-                            <p>Encuentra tu hogar temporal para vacaciones o estadías cortas</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card category-card">
-                        <div class="card-body text-center">
-                            <h3>Alquiler Permanente</h3>
-                            <p>Propiedades para alquilar a largo plazo</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+<!-- Nueva sección para mostrar imágenes subidas -->
+<section id="uploaded-items" class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Productos Disponibles</h2>
+        <div class="row" id="items-grid">
+            <!-- Aquí se cargarán dinámicamente las imágenes desde Firebase -->
+        </div>
+    </div>
+</section>
             <div class="row">
                 <div class="col-12">
                     <div class="card category-card">
@@ -353,5 +346,90 @@
             this.reset();
         });
     </script>
+    <script type="module" src="app.js"></script>
+    <!-- Agrega esto antes del cierre de </body> -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+  import { 
+    getFirestore, collection, getDocs, query, where, orderBy
+  } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore.js";
+  import { 
+    getStorage, ref, getDownloadURL 
+  } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-storage.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBihPGEHqcmiDorRoCxDpsEVwfcyVPaTjU",
+    authDomain: "feth-gestiones-comerciales.firebaseapp.com",
+    projectId: "feth-gestiones-comerciales",
+    storageBucket: "feth-gestiones-comerciales.appspot.com",
+    messagingSenderId: "457629067646",
+    appId: "1:457629067646:web:00fe698a9009b8dc52ab2f",
+    measurementId: "G-4CG6HY8L51"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  const storage = getStorage(app);
+
+  // Función para cargar items
+  async function loadItems(category = null) {
+    const itemsGrid = document.getElementById('items-grid');
+    itemsGrid.innerHTML = '<div class="col-12 text-center"><div class="spinner-border text-primary" role="status"></div></div>';
+
+    let q;
+    if (category) {
+      q = query(collection(db, "items"), where("category", "==", category), orderBy("timestamp", "desc"));
+    } else {
+      q = query(collection(db, "items"), orderBy("timestamp", "desc"));
+    }
+
+    const querySnapshot = await getDocs(q);
+    itemsGrid.innerHTML = '';
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      itemsGrid.innerHTML += `
+        <div class="col-md-4 mb-4">
+          <div class="card h-100">
+            <img src="${data.imageUrl}" class="card-img-top" style="height: 200px; object-fit: cover;">
+            <div class="card-body">
+              <h5 class="card-title">${data.title}</h5>
+              <p class="card-text">${data.description}</p>
+              ${data.price ? `<p class="text-success fw-bold">$${data.price}</p>` : ''}
+            </div>
+            <div class="card-footer bg-white">
+              <small class="text-muted">${formatCategoryName(data.category)}</small>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    if (querySnapshot.empty) {
+      itemsGrid.innerHTML = '<div class="col-12 text-center py-5"><h5>No hay items en esta categoría</h5></div>';
+    }
+  }
+
+  function formatCategoryName(category) {
+    const names = {
+      'venta': 'Propiedad en Venta',
+      'temporario': 'Alquiler Temporario',
+      'alquiler': 'Alquiler Permanente',
+      'autos': 'Vehículo',
+      'bienes': 'Bien General'
+    };
+    return names[category] || category;
+  }
+
+  // Filtros de categoría
+  document.querySelectorAll('.category-filter').forEach(button => {
+    button.addEventListener('click', () => {
+      loadItems(button.dataset.category);
+    });
+  });
+
+  // Cargar todos los items al inicio
+  loadItems();
+</script>
 </body>
 </html>
